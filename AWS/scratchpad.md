@@ -7,6 +7,7 @@
 
 
 # Install AWS cli
+I have added this to the cloud-init script, but will keep this note for now. 
 
 [LINK](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)  
 

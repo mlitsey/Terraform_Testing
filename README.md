@@ -24,8 +24,15 @@ I chose to use Terraform for these project to allow me to quickly deploy and tea
 
 The HCL language is used for setting up the `main.tf` files, but the syntax and usage of the language between providers isn't fully consistent.  Having written the code for Azure it was not a simple copy to the AWS platform.  
 
+To maintain behavior of how disks are attached the the VM's, allowing the cloud-init script to work, I had to add a `depends_on` code to the attach section for the disks I'm creating.  I found that deploying the infrastructure was inconsistent until I added this feature. 
+
+I also had to add a `lifecycle` block to some resources with a `ignore_changes` section for testing increases in disk performance and capacity.  Otherwise this would break the state of the system. 
+
 ## Cloud-Init
 
 I had attempted to use cloud config on the AWS platform but found that some configuration items were not available.  The cloud-init script was developed to try and simplify setup issues our team was seeing consistently.  
+
+In my testing I found that AWS and Azure use different method for naming NVME devices. AWS will change the digit after `nvme[3-6]n1` where Azure will change it at the end `nvme0n[4-7]`. This may change in the future and updates will need to be made as needed. 
+
 
 [Start Page](./README.md)  
